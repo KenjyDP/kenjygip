@@ -5,24 +5,19 @@ html, body {
   --bs-link-hover-color: #c09300;
 }
 
-/* width and height of the scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
-/* color of the scrollbar track */
 ::-webkit-scrollbar-track {
   background-color: #252525;
 }
 
-/* color and style of the scrollbar thumb */
 ::-webkit-scrollbar-thumb {
   background-color: #6c6c6c;
-  border-radius: 5px;
 }
 
-/* hover styles for the scrollbar thumb */
 ::-webkit-scrollbar-thumb:hover {
   background-color: #484848;
 }
@@ -32,8 +27,16 @@ nav {
 }
 
 footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-image: linear-gradient(to right, #f0b800, #db3e18);
-  height: 50%;
+  padding: 1rem;
+}
+
+footer p {
+  margin: 0;
+  color: #F6E8EA;
 }
 
 hr {
@@ -140,7 +143,6 @@ img {
   display: inline-block;
   background-color: #f0b800;
   border: none;
-  color: #F6E8EA;
   padding: 10px 20px;
   cursor: pointer;
 }
@@ -165,43 +167,6 @@ img {
 .nav-img:hover {
   transform: scale(1.08);
   filter: invert(100%);
-  animation: shake 0.3s;
-}
-
-@keyframes shake {
-  0% {
-    transform: translate(0, 0) rotate(0);
-  }
-  10% {
-    transform: translate(-2px, 0) rotate(-5deg);
-  }
-  20% {
-    transform: translate(2px, 0) rotate(5deg);
-  }
-  30% {
-    transform: translate(-2px, 0) rotate(-5deg);
-  }
-  40% {
-    transform: translate(2px, 0) rotate(5deg);
-  }
-  50% {
-    transform: translate(-2px, 0) rotate(-5deg);
-  }
-  60% {
-    transform: translate(2px, 0) rotate(5deg);
-  }
-  70% {
-    transform: translate(-2px, 0) rotate(-5deg);
-  }
-  80% {
-    transform: translate(2px, 0) rotate(5deg);
-  }
-  90% {
-    transform: translate(-2px, 0) rotate(-5deg);
-  }
-  100% {
-    transform: translate(0, 0) rotate(0);
-  }
 }
 
 .nav-margin {
@@ -220,9 +185,31 @@ img {
 }
 
 .home-btn-size {
-  width: 200px;
-  height: 45px;
+  width: auto;
+  height: auto;
+  min-width: 180px;
   font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  /* Styles for screens smaller than 768px */
+  .home-btn-size {
+    width: 120px;
+    height: auto;
+    min-width: 100px;
+    min-height: 65px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 576px) {
+  /* Styles for screens smaller than 576px */
+  .home-btn-size {
+    width: 100px;
+    height: auto;
+    min-height: 65px;
+    font-size: 0.6rem;
+  }
 }
 
 .img-size {
@@ -260,17 +247,20 @@ img {
 
 .aboutWidth {
   width: 70%;
-  margin-left: 17%;
+  max-width: 400px;
+  margin: auto;
 }
 
 .aboutImg {
-  margin-left: 9%;
+  margin-bottom: 10px;
 }
 
 .center-about {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto;
+  text-align: center;
 }
 
 .carousel-size {
@@ -284,7 +274,7 @@ img {
   background-color: rgb(31, 31, 31);
   width: 50px;
   height: 50px;
-  border-radius: 10%;
+  border-radius: 25px;
 }
 
 .my-6 {
@@ -323,7 +313,7 @@ img {
 }
 
 .verslagTitle {
-  margin-bottom:3rem;
+  margin-bottom: 30px;
 }
 
 .word {
@@ -343,4 +333,95 @@ img {
 .py-6 {
   padding-top: 5rem !important;
   padding-bottom: 5rem !important;
+}
+
+.card-container {
+  display: flex;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  border: none;
+}
+
+.card {
+  position: relative;
+  width: 450px;
+  height: 450px;
+  perspective: 1000px;
+  cursor: pointer;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  border-radius: 25px;
+  border: none;
+}
+
+.card:hover {
+  transform: rotateY(180deg);
+  border: none;
+}
+
+.card .front,
+.card .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 21px;
+  border: none;
+}
+
+.card .front {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
+.card .back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to right, #f0b800, #db3e18);
+  transform: rotateY(180deg);
+  border: none;
+}
+
+.card .back p {
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+  border: none;
+}
+
+.card img {
+  height: 101%;
+  width: 101%;
+  object-fit: cover;
+  border: none;
+}
+
+.card p {
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.verblijf {
+  max-width: 60%;
+}
+
+.linkie {
+  text-decoration: none;
 }
