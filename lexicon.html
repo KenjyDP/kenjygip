@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lexicon - Kenjy</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="img/logo.png" type="image/png">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="dropdown-nav"></div>
+    <div class="container-fluid">
+       <a class="nav-link" href="index.html">
+          <img src="img/logo.png" alt="Logo" class="nav-img">
+       </a>
+       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="navbar-collapse collapse" id="navbarColor01">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item active nav-margin-rest">
+              <a class="nav-link" href="aboutMe.html">About Me</a>
+            </li>
+            <li class="nav-item active nav-margin-rest">
+              <a class="nav-link" href="GIP.html">GIP</a>
+            </li>
+             <li class="nav-item dropdown nav-margin-rest">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Stage / GWP</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                <a class="dropdown-item" href="stageVlog.html">Vlog</a>
+                <a class="dropdown-item" href="stageVerslag.html">Verslag</a>
+                <a class="dropdown-item" href="documenten.html">Documenten</a>
+                  </div>
+                  </li>
+            <li class="nav-item dropdown nav-margin-rest last-nav-btn">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Documentatie</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                <a class="dropdown-item" href="lexicon.html">Lexicon</a>
+                <a class="dropdown-item" href="userStories.html">User Stories</a>
+                <a class="dropdown-item" href="planning.html">Planning</a>
+                <a class="dropdown-item" href="logboek.html">Logboek</a>
+              </div>
+            </li>
+          </ul>
+       </div>
+    </div>
+  </nav>
+  <div class="container my-5">
+    <h1 class="text-center">Lexicon</h1>
+    <h4 class="text-center">Alle woordenschat dat vermeld wordt in mijn GIP</h4>
+     </div>
+  <hr class="container my-5">
+    <div class="row">
+      <table>
+        <thead>
+          <th>Id</th>
+          <th>Term ENG</th>
+          <th>Description ENG</th>
+          <th>Term NL</th>
+          <th>Description NL</th>
+          <th>Term FR</th>
+          <th>Description FR</th>
+          <th></th>
+        </thead>
+        <tbody id="tbody1">
+        </tbody>
+      </table>
+    </div>
+    <hr class="container my-5">
+    <footer class="py-4 text-center text-white">
+      <p>&copy; 2023 Copyright Kenjy Depoorter</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+
+    <script>
+      const firebaseConfig = {
+      apiKey: "AIzaSyBcKa1i8zSAzQvIe7nMOENqGvk8sItCl_A",
+      authDomain: "databasegip.firebaseapp.com",
+      databaseURL: "https://databasegip-default-rtdb.europe-west1.firebasedatabase.app/",
+      projectId: "databasegip",
+      storageBucket: "databasegip.appspot.com",
+      messagingSenderId: "626271492626",
+      appId: "1:626271492626:web:8b0e1265ca83c69bbd56cb",
+      measurementId: "G-8BNC95M54T"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    function SelectAllData() {
+            document.getElementById('tbody1').innerHTML = "";
+            TmNo = 0;
+            firebase.database().ref('lexicon/').on('value', (snapshot) => {
+                snapshot.forEach((CurrentRecord) => {
+                    var Id_Term = CurrentRecord.val().Id_Term;
+                    var Term_ENG = CurrentRecord.val().Term_ENG;
+                    var Description_ENG = CurrentRecord.val().Description_ENG;
+                    var Term_NL = CurrentRecord.val().Term_NL;
+                    var Description_NL = CurrentRecord.val().Description_NL;
+                    var Term_FR = CurrentRecord.val().Term_FR;
+                    var Description_FR = CurrentRecord.val().Description_FR;
+                    AddItemsToTable(Term_ENG, Description_ENG, Term_NL, Description_NL, Term_FR, Description_FR);
+                });
+            });
+        }
+
+        window.onload = SelectAllData;
+
+        var TermList = [];
+        function AddItemsToTable(Term_ENG, Description_ENG, Term_NL, Description_NL, Term_FR, Description_FR) {
+            var tbody1 = document.getElementById('tbody1');
+            var trow = document.createElement('tr');
+            var td0 = document.createElement('td');
+            var td1 = document.createElement('td');
+            var td2 = document.createElement('td');
+            var td3 = document.createElement('td');
+            var td4 = document.createElement('td');
+            var td5 = document.createElement('td');
+            var td6 = document.createElement('td');
+            var td7 = document.createElement('td');
+            TermList.push([Term_ENG, Description_ENG, Term_NL, Description_NL, Term_FR, Description_FR])
+            td0.innerHTML = ++TmNo;
+            td1.innerHTML = Term_ENG;
+            td2.innerHTML = Description_ENG;
+            td3.innerHTML = Term_NL;
+            td4.innerHTML = Description_NL;
+            td5.innerHTML = Term_FR;
+            td6.innerHTML = Description_FR;
+            td7.innerHTML = '<button class="btn btn-danger" onclick="deleteRow(this)">Delete</button>';
+            td1.classList += "TEField";
+            td2.classList += "DEField";
+            td3.classList += "TDField";
+            td4.classList += "DDField";
+            td5.classList += "TFField";
+            td6.classList += "DFField";
+            trow.appendChild(td0);
+            trow.appendChild(td1);
+            trow.appendChild(td2);
+            trow.appendChild(td3);
+            trow.appendChild(td4);
+            trow.appendChild(td5);
+            trow.appendChild(td6);
+            trow.appendChild(td7);
+            tbody1.appendChild(trow);
+        }
+
+        function deleteRow(row) {
+          var index = row.parentNode.parentNode.rowIndex; // Get the index of the clicked row
+          var tbody1 = document.getElementById('tbody1');
+          tbody1.deleteRow(index); // Delete the row from the table
+          TermList.splice(index - 1, 1); // Remove the corresponding item from the TermList array
+      }
+  </script>
+  </body>
+</html>
